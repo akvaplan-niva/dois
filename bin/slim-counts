@@ -1,0 +1,26 @@
+#!/bin/bash
+export refs=slim/*.ndjson
+
+echo "Total Akvaplan-niva DOI publications"
+cat $refs | wc -l
+echo ""
+
+echo "Year counts"
+cat $refs | ./bin/count-year
+echo ""
+
+echo "Open counts"
+cat $refs | ./bin/count-open
+echo ""
+
+
+# echo "Journal counts (top 20)"
+# cat $refs | ./bin/count-container | nd-filter 'i<=20'
+# echo ""
+
+echo "License counts"
+cat $refs | ./bin/count-license
+echo ""
+
+# echo "Author counts (top 20)"
+# cat $refs | ./bin/count-authors | nd-filter 'i<=20'

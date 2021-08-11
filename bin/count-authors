@@ -1,0 +1,2 @@
+#!/bin/bash
+nd-map 'd.authors.map( ({family, given}) => ({family, given}))' | ndjson-split | nd-sort --on family | nd-count --sort --reverse

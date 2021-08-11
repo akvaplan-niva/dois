@@ -1,0 +1,18 @@
+#!/bin/bash
+nd-map 'authors = (d.author??[]).map(({family,given,name,sequence})=>({ family, given, name, first: sequence === "first" ? true : undefined })),
+  title=(d.title??[]).join("|"),
+  container = d["container-title"] ? d["container-title"][0] : null,
+  doi=d.DOI,
+  type=d.type,
+
+  iso = (p,i=0) => p.map(n => 0===i++ ? String(n) : String(n).padStart(2,"0")).join("-"),
+  online = d["published-online"] ? d["published-online"]["date-parts"][0] : [],
+  print = d["published-print"] ? d["published-print"]["date-parts"][0] : [],
+  dates = [iso(online),iso(print)].filter(s=>s?.length>=4),
+  published = dates.sort()[0],
+
+  cc = (d.license??[]).map(({URL})=>URL).find((url) => /creativecommons\.org/.test(url)),
+  creativecommons = cc ? cc.match(/\/(licenses|publicdomain)\/([^/]+)/)[2] : undefined,
+  open = (!d.license || d.license.length===0) ? null : creativecommons !== undefined,
+
+  { published, type, container, title, authors, doi, creativecommons, open }'

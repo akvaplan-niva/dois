@@ -1,0 +1,2 @@
+#!/bin/bash
+nd-group 'd?.open' | nd-map '{ open: d[0], count: d[1].length }'

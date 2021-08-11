@@ -1,0 +1,2 @@
+#!/bin/bash
+nd-count --select creativecommons

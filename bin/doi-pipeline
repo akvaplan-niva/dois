@@ -1,0 +1,28 @@
+#!/bin/bash
+mkdir -p crossref slim
+rm -rf crossref/* slim/*
+
+cat raw/*.txt | ./bin/raw2doi | ./bin/crossref-works  \
+  | nd-map d.DOI | sort | uniq > doi/misc/raw.ndjson
+
+cat doi/*/*.ndjson | sort | uniq | ./bin/crossref-works 2> crossref/err.txt \
+  | nd-group d.DOI | nd-map 'd[1][0]' \
+  > crossref/akvaplan-works.ndjson
+
+cat crossref/akvaplan-works.ndjson | ./bin/crossref-slim \
+  | ./bin/partition-slim-by-year
+
+./bin/slim-counts
+
+sha_expected="1ee6650b4fc6f70c21edc22f3c2738b0369334ac"
+sha_works=`cat crossref/akvaplan-works.ndjson | nd-map d.DOI | sort | sha1sum |  cut -d' ' -f1`
+sha_slim=`cat slim/* | nd-map d.doi | sort | sha1sum |  cut -d' ' -f1`
+
+if [ "$sha_works" != "$sha_expected" ]; then
+  echo "Error: SHA checksum not as expectd"
+  exit 1
+fi
+if [ "$sha_works" != "$sha_slim" ]; then
+  echo "Error: SHA checksum of DOIs in slim != works"
+  exit 1
+fi

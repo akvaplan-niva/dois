@@ -1,0 +1,7 @@
+#!/bin/bash
+nd-group 'd.published?.substring(0,4)' \
+  | nd-map 'json = (l) => stringify(l),
+  year = d[0]?.length ? d[0] : null,
+  path=`slim/${year}.ndjson`,
+  ndjson=(d[1]).sort((a,b)=> new Date(a?.published) - new Date(b.published)).map(l => json(l)).join("\n")+"\n",
+  Deno.writeTextFile(path, ndjson)'
