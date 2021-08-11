@@ -16,9 +16,9 @@ For each DOI, the complete JSON metadata is retrieved from the Crossref REST API
 
 Notice: The `crossref-works` comand will cache all HTTP responses, calling the Crossref HTTP service just once per DOI.
 
-## Simple metadata
+## Slim metadata
 
-The pipeline creates slimmer metadata in the `simple` folder, partitioned to one newline delimited JSON file per year.
+The pipeline creates simplified metadata in the `slim` folder, partitioned to one newline delimited JSON file per year.
 
 ## Prerequisites
 
