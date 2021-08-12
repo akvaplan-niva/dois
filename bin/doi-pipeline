@@ -14,12 +14,12 @@ cat crossref/akvaplan-works.ndjson | ./bin/crossref-slim \
 
 ./bin/slim-counts
 
-sha_expected="1ee6650b4fc6f70c21edc22f3c2738b0369334ac"
+sha_expected="b66d53cf5cb48ccf84959cdf2e1204cf39c5cb3c"
 sha_works=`cat crossref/akvaplan-works.ndjson | nd-map d.DOI | sort | sha1sum |  cut -d' ' -f1`
 sha_slim=`cat slim/* | nd-map d.doi | sort | sha1sum |  cut -d' ' -f1`
 
 if [ "$sha_works" != "$sha_expected" ]; then
-  echo "Error: SHA checksum not as expectd"
+  echo "Error: SHA checksum of DOIS $sha_works differs from expected $sha_expected"
   exit 1
 fi
 if [ "$sha_works" != "$sha_slim" ]; then
