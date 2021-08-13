@@ -1,4 +1,5 @@
 #!/bin/bash
+source ./bin/sha_expected
 mkdir -p crossref slim
 rm -rf crossref/* slim/*
 
@@ -14,7 +15,6 @@ cat crossref/akvaplan-works.ndjson | ./bin/crossref-slim \
 
 ./bin/slim-counts
 
-sha_expected="b66d53cf5cb48ccf84959cdf2e1204cf39c5cb3c"
 sha_works=`cat crossref/akvaplan-works.ndjson | nd-map d.DOI | sort | sha1sum |  cut -d' ' -f1`
 sha_slim=`cat slim/* | nd-map d.doi | sort | sha1sum |  cut -d' ' -f1`
 
