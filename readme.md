@@ -1,6 +1,7 @@
 # Akvaplan-niva DOIs
 
-This [repository](https://github.com/akvaplan-niva/dois) contains a register of Akvaplan-niva publications with a DOI.
+This [repository](https://github.com/akvaplan-niva/dois) contains a register of Akvaplan-niva publications with a DOI,
+together with slim publication metadata from the Crossref API.
 
 ## Pipeline
 
@@ -10,13 +11,15 @@ The following reads in a list DOIs, pipes them to the `crossref-works` command, 
 $ ./bin/doi-pipeline
 ```
 
-## Crossref
+## Output
 
-For each DOI, JSON metadata is retrieved from the [Crossref API](https://api.crossref.org/), and put into: `crossref/akvaplan-works.ndjson`.
+### Crossref
+
+For each DOI, JSON metadata is retrieved from the [Crossref API](https://api.crossref.org/), and put into: `crossref/akvaplan-works.ndjson` (not in git)
 
 Notice: The `crossref-works` comand will cache all HTTP responses, calling the Crossref HTTP service just once per DOI across all invocations.
 
-## Slim
+### Slim
 
 The pipeline creates simplified metadata in the `slim` folder, partitioned to one newline delimited JSON file per year, with the following JSON structure (prettified):
 

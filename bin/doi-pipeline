@@ -1,28 +1,22 @@
 #!/bin/bash
-source ./bin/sha_expected
 mkdir -p crossref slim
 rm -rf crossref/* slim/*
 
+# Extract DOIs from raw publication references
 cat raw/*.txt | ./bin/raw2doi | ./bin/crossref-works  \
   | nd-map d.DOI | sort | uniq > doi/misc/raw.ndjson
 
+# Get Crossref "works" metadata for each DOI
 cat doi/*/*.ndjson | sort | uniq | ./bin/crossref-works 2> crossref/err.txt \
   | nd-group d.DOI | nd-map 'd[1][0]' \
   > crossref/akvaplan-works.ndjson
 
+# Create slim metadata, partitioned by year
 cat crossref/akvaplan-works.ndjson | ./bin/crossref-slim \
   | ./bin/partition-slim-by-year
 
+# Show summary counts
 ./bin/slim-counts
 
-sha_works=`cat crossref/akvaplan-works.ndjson | nd-map d.DOI | sort | sha1sum |  cut -d' ' -f1`
-sha_slim=`cat slim/* | nd-map d.doi | sort | sha1sum |  cut -d' ' -f1`
-
-if [ "$sha_works" != "$sha_expected" ]; then
-  echo "Error: SHA checksum of DOIS $sha_works differs from expected $sha_expected"
-  exit 1
-fi
-if [ "$sha_works" != "$sha_slim" ]; then
-  echo "Error: SHA checksum of DOIs in slim != works"
-  exit 1
-fi
+# Verify SHA checksums
+./bin/verify-checksums
