@@ -1,3 +1,4 @@
+import { fix } from "./fix-map.js";
 import { cache } from "https://deno.land/x/cache@0.2.13/mod.ts";
 import { main } from "https://deno.land/x/newline@v0.1.0/nd-map/main.js";
 import { ndmapcommand as command } from "https://deno.land/x/newline@v0.1.0/nd-map/command.js";
@@ -21,8 +22,7 @@ const fetchAndCacheCrossrefDOI = async (d, i, args) => {
       const worksURL = new URL(`${base}/works/${doi}`);
       const file = await cache(worksURL);
       const { message } = JSON.parse(await Deno.readTextFile(file.path));
-      message.title = message.title.map((t) => t.replace(/\s{2,}/g, " "));
-      return message;
+      return fix(message);
     }
   } catch (e) {
     console.error(String(d));
