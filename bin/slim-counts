@@ -13,6 +13,9 @@ echo "Open counts"
 cat $refs | ./bin/count-open
 echo ""
 
+echo "PDF counts"
+cat $refs | ./bin/count-pdf
+echo ""
 
 # echo "Journal counts (top 20)"
 # cat $refs | ./bin/count-container | nd-filter 'i<=20'

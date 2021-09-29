@@ -1,46 +1,73 @@
 # Akvaplan-niva DOIs
 
-This [repository](https://github.com/akvaplan-niva/dois) contains a register of Akvaplan-niva publications with a DOI,
-together with slim publication metadata from the Crossref API.
+The git repository [akvaplan-niva/dois](https://github.com/akvaplan-niva/dois) contains Akvaplan-niva related publications with a DOI.
 
-## Pipeline
+### Slim metadata
 
-The following reads in a list DOIs, pipes them to the `crossref-works` command, before creating a slimmed down version of the metadata.
-
-```sh
-$ ./bin/doi-pipeline
-```
-
-## Output
-
-### Crossref
-
-For each DOI, JSON metadata is retrieved from the [Crossref API](https://api.crossref.org/), and put into: `crossref/akvaplan-works.ndjson` (not in git)
-
-Notice: The `crossref-works` comand will cache all HTTP responses, calling the Crossref HTTP service just once per DOI across all invocations.
-
-### Slim
-
-The pipeline creates simplified metadata in the `slim` folder, partitioned to one newline delimited JSON file per year, with the following JSON structure (prettified):
+The [DOI pipeline](bin/doi-pipeline) yields one newline delimited JSON file per year, containing _slim_ metadata like:
 
 ```json
 {
-  "published": "2021-07",
+  "published": "2021-06-07",
   "type": "journal-article",
-  "container": "Environmental Pollution",
-  "title": "Terrestrial inputs govern spatial distribution of polychlorinated biphenyls (PCBs) and hexachlorobenzene (HCB) in an Arctic fjord system (Isfjorden, Svalbard)",
+  "container": "Frontiers in Environmental Science",
+  "title": "Microplastic Fiber Emissions From Wastewater Effluents: Abundance, Transport Behavior and Exposure Risk for Biota in an Arctic Fjord",
   "authors": [
-    { "family": "Johansen", "given": "Sverre", "first": true },
-    { "family": "Poste", "given": "Amanda" },
-    { "family": "Allan", "given": "Ian" },
-    { "family": "Evenset", "given": "Anita" },
-    { "family": "Carlsson", "given": "Pernilla" }
+    { "family": "Herzke", "given": "Dorte", "first": true },
+    { "family": "Ghaffari", "given": "Peygham" },
+    { "family": "Sundet", "given": "Jan Henry" },
+    { "family": "Tranang", "given": "Caroline Aas" },
+    { "family": "Halsband", "given": "Claudia" }
   ],
-  "doi": "10.1016/j.envpol.2021.116963",
-  "creativecommons": "by",
-  "open": true
+  "doi": "10.3389/fenvs.2021.662168",
+  "open": true,
+  "pdf": "https://www.frontiersin.org/articles/10.3389/fenvs.2021.662168/pdf"
 }
 ```
+
+## Use
+
+### Add DOI
+
+Add/edit NDJSON file in the [`doi/year`] folder and run pipeline:
+
+```bash
+./bin/doi-pipeline
+```
+
+## Pipeline details
+
+The DOI pipeline consists of the following steps:
+
+### 1. Create DOI list
+
+First, create list of unique DOIs
+
+- Extract DOIs from [`raw`] text references
+- Add these into the NDJSON-formatted DOIs in [`doi`]
+- De-deplicate the DOIs
+
+### 2. Fetch metadata
+
+For each DOI
+
+- Fetch "works" metadata from [Crossref API](https://api.crossref.org/)
+- Create slim metadata from Crossref works
+- Fetch PDF location from [Unpaywall API](https://unpaywall.org/products/api)
+
+> Notice: The pipeline aggressively caches all HTTP responses, calling the APIs just once per DOI across all invocations. On linux, the cache is located in `$HOME/.cache/deno/https/api.*.org`.
+
+JSON metadata from Crossref is stored in: `crossref/akvaplan-works.ndjson` (not in git)
+Unpaywall PDF links are unpaywall/akvaplan-pdfs.js
+
+### Create slim metadata product
+
+Finally
+
+- Add PDF URL to slim metadata
+- Partition slim metadata, creating one file per year in `slim`
+- Show summary counts
+- Verify SHA checksums
 
 ## Prerequisites
 
