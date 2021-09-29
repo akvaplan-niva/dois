@@ -1,0 +1,2 @@
+#!/bin/bash
+nd-filter 'd.pdf?.length>0' | nd-map '{open}=d, hasPDF = d.pdf?.length>0, {open, hasPDF}' | nd-count
