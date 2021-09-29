@@ -6,11 +6,6 @@ import { ndmapcommand as command } from "https://deno.land/x/newline@v0.1.0/nd-m
 const base = "https://api.crossref.org";
 const isDOI = (s) => /^(https:\/\/doi.org\/)?10\./.test(String(s).trim());
 
-// {"doi":"10.1080/10454438.2014.940797","title":"Triploid Induction in Atlantic Cod (Gadus morhuaL.) by the Use of Different Pressure Levels"}
-// {"doi":"10.1111/anu.12080","title":"Improved performance of Atlantic cod (Gadus morhuaL.) larvae following enhancement of live feed using a fish protein hydrolysate"}
-// {"doi":"10.1111/are.12082","title":"Production performance of Atlantic salmon (Salmo salarL.) postsmolts in cyclic hypoxia, and following compensatory growth"}
-// {"doi":"10.1111/are.12312","title":"Effects of filleting method, stress, storage and season on the quality of farmed Atlantic cod (Gadus morhuaL.)"}
-
 const fetchAndCacheCrossrefDOI = async (d, i, args) => {
   try {
     let doi = d;

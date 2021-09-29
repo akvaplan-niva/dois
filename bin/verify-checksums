@@ -4,10 +4,10 @@ sha_works=`cat crossref/akvaplan-works.ndjson | nd-map d.DOI | sort | sha1sum | 
 sha_slim=`cat slim/* | nd-map d.doi | sort | sha1sum |  cut -d' ' -f1`
 
 if [ "$sha_works" != "$sha_expected" ]; then
-  echo "Error: SHA checksum of DOIS $sha_works differs from expected $sha_expected"
+  echo "Warning: SHA checksum of DOIS $sha_works differs from expected $sha_expected"
   exit 1
 fi
 if [ "$sha_works" != "$sha_slim" ]; then
-  echo "Error: SHA checksum of DOIs in slim != works"
+  echo "Error: SHA checksum of DOIS differ in slim and Crossref works"
   exit 1
 fi
