@@ -1,6 +1,6 @@
 import { fix } from "./fix-map.js";
 import { cache } from "https://deno.land/x/cache@0.2.13/mod.ts";
-import { main } from "https://deno.land/x/newline@v0.1.0/nd-map/main.js";
+import { main } from "https://deno.land/x/newline@v0.2.0/nd-map/main.js";
 import { ndmapcommand as command } from "https://deno.land/x/newline@v0.1.0/nd-map/command.js";
 
 const base = "https://api.crossref.org";
@@ -20,8 +20,7 @@ const fetchAndCacheCrossrefDOI = async (d, i, args) => {
       return fix(message);
     }
   } catch (e) {
-    console.error(String(d));
-    console.error(e);
+    console.error(e.prototype, e?.class?.name, e?.message, String(d));
   }
 };
 
