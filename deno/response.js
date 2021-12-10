@@ -1,3 +1,10 @@
+export const jsonApiResponse = (o) =>
+  new Response(JSON.stringify(o), {
+    headers: {
+      "content-type": "application/vnd.api+json; charset=utf-8",
+    },
+  });
+
 export const jsonResponse = (o) =>
   new Response(JSON.stringify(o), {
     headers: {
