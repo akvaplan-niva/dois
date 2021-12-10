@@ -15,5 +15,5 @@ nd-map 'authors = (d.author??[]).map(({family,given,name,sequence})=>({ family, 
   cc = (d.license??[]).map(({URL})=>URL).find((url) => /creativecommons\.org/.test(url)),
   creativecommons = cc ? cc.match(/\/(licenses|publicdomain)\/([^/]+)/)[2] : undefined,
   open = (!d.license || d.license.length===0) ? null : creativecommons !== undefined,
-
-  { published, type, container, title, authors, doi, creativecommons, open }'
+  license = creativecommons ? `cc-${creativecommons}` : undefined,
+  { published, type, container, title, authors, doi, license, open }'
