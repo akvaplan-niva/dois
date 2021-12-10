@@ -4,7 +4,7 @@ rm -rf crossref/* slim/*
 
 # Extract DOIs from raw publication references
 cat raw/*.txt | ./bin/raw2doi | ./bin/crossref-works  \
-  | nd-map d.DOI | sort | uniq > doi/misc/raw.ndjson
+  | nd-map d.DOI | sort | uniq > doi/misc/_raw.ndjson
 
 # Get Crossref "works" metadata for each DOI
 cat doi/*/*.ndjson | sort | uniq | ./bin/crossref-works 2> crossref/errors.txt \
@@ -15,7 +15,10 @@ cat doi/*/*.ndjson | sort | uniq | ./bin/crossref-works 2> crossref/errors.txt \
 cat crossref/akvaplan-works.ndjson | ./bin/crossref-slim > crossref/akvaplan-slim.ndjson
 
 # Get pdf from Unpaywall
-cat crossref/akvaplan-slim.ndjson | nd-map '`https://api.unpaywall.org/v2/doi/${d.doi}?email=info@akvaplan.niva.no`' | nd-fetch  --cache | nd-map '{doi} = d, pdf=d?.best_oa_location?.url_for_pdf ?? undefined, pdf ? { doi, pdf } : undefined' > unpaywall/akvaplan-pdfs.js
+cat crossref/akvaplan-slim.ndjson | nd-map '`https://api.unpaywall.org/v2/doi/${d.doi}?email=info@akvaplan.niva.no`' | nd-fetch  --cache | nd-map '{doi} = d,
+best_oa_pdf = d?.best_oa_location?.url_for_pdf,
+pdf = best_oa_pdf ? best_oa_pdf : d?.oa_locations?.map(({ url_for_pdf }) => url_for_pdf).find((url) => url !== null),
+pdf ? { doi, pdf } : undefined' > unpaywall/akvaplan-pdfs.js
 
 # Create slim metadata
 # 1. JOIN Crossref slim and Unpaywall pdf
