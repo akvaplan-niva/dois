@@ -1,6 +1,8 @@
-import { jsonResponse } from "./mod.js";
+import { jsonResponse } from "./response.js";
 
-export const directFileChildren = async ({ dir }) => {
+export const dir = `./slim`;
+
+export const filesInDir = async ({ dir }) => {
   const _f = [];
   for await (const { name, isFile } of Deno.readDir(dir)) {
     if (isFile) {
@@ -10,8 +12,8 @@ export const directFileChildren = async ({ dir }) => {
   return _f.sort((a, b) => a.localeCompare(b)).map((name) => ({ name }));
 };
 
-export const jsonApiFileLinks = async ({ dir, base = "" } = {}) => {
-  const files = await directFileChildren({ dir });
+export const jsonFileLinks = async ({ dir, base = "" } = {}) => {
+  const files = await filesInDir({ dir });
   const links = files.map(({ name }) => ({ href: `${base}${name}` }));
   return jsonResponse({ links });
 };

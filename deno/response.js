@@ -1,3 +1,6 @@
+export const notFound = ({ request }) =>
+  new Response(`Not Found\n${request.url}`, { status: 404 });
+
 export const jsonApiResponse = (o) =>
   new Response(JSON.stringify(o), {
     headers: {
