@@ -1,8 +1,16 @@
-import { textResponse, notFound } from "./response.js";
+import { notFound, textResponse, jsonResponse } from "./response.js";
 
-export const getslim = async ({ input, groups, request }) => {
+export const getslim = async ({ input, groups: { format }, request }) => {
   try {
-    const text = await Deno.readTextFile(`.${input}`);
+    const path =
+      format === "ndjson"
+        ? `.${input}`
+        : "." + input.replace(/\.json$/i, ".ndjson");
+    const text = await Deno.readTextFile(path);
+    if ("json" === format) {
+      const arr = text.trim().split("\n").map(JSON.parse);
+      return jsonResponse(arr);
+    }
     return textResponse(text);
   } catch (e) {
     if (e.name && /NotFound/.test(e.name)) {
