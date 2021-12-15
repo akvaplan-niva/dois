@@ -1,24 +1,34 @@
-import { dir } from "./file.js";
-import { jsonResponse, notFound } from "./response.js";
+import { jsonResponse, httpError } from "./response.js";
+import { doimap } from "./doi-map.js";
 
-export const doimap = new Map();
+const config = { limit: 1, format: "json" };
 
-export const init = async ({ doimap, dir }) => {
-  for await (const { name, isFile } of Deno.readDir(dir)) {
-    if (isFile) {
-      const text = (await Deno.readTextFile(`${dir}/${name}`)).trim();
-      const pubs = text.split("\n").map(JSON.parse);
-      for (const { doi, ...p } of pubs) {
-        doimap.set(doi.toLowerCase(), { doi, ...p });
-      }
-    }
-  }
+const validateRequest = ({ url }) => {
+  return { status: 400 };
 };
 
-export const getdoi = ({ input, groups, request }) => {
-  const { prefix, suffix } = groups;
+export const getdoi = ({ /*input,*/ groups: { prefix, suffix }, request }) => {
   const doi = `${prefix}/${suffix}`.toLowerCase();
   return doimap.has(doi)
     ? jsonResponse(doimap.get(doi))
-    : notFound({ request });
+    : httpError({ request, status: 404 });
+};
+
+const stringSortFactory = ({ key, dir = 1 } = {}) => (a, b) =>
+  dir * a?.[key]?.localeCompare(b?.[key]);
+
+export const getdois = ({ request, url, groups }) => {
+  const { status } = validateRequest({ request });
+  const limit = url.searchParams.get("limit") ?? config.limit;
+  const format = url.searchParams.get("format") ?? config.format;
+  const data = [...doimap.values()]
+    .sort(stringSortFactory({ key: "title" }))
+    .slice(0, limit);
+  if ("json" === format) {
+    return jsonResponse({
+      data,
+    });
+  }
+  console.warn(data);
+  return new Response(data.map(JSON.stringify).join("\n"));
 };

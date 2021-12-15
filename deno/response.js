@@ -1,5 +1,13 @@
-export const notFound = ({ request }) =>
-  new Response(`Not Found\n${request.url}`, { status: 404 });
+import { STATUS_TEXT } from "https://deno.land/std@0.117.0/http/http_status.ts";
+
+export const statusText = ({ status }) => STATUS_TEXT.get(status);
+
+export const httpError = ({ request, status }) =>
+  new Response(`${status} ${statusText({ status })}\n${request.url}\n`, {
+    status,
+  });
+
+export const notFound = ({ request }) => httpError({ request, status: 404 });
 
 export const jsonApiResponse = (o) =>
   new Response(JSON.stringify(o), {
