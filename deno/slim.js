@@ -1,11 +1,10 @@
-import { notFound, textResponse, jsonResponse } from "./response.js";
+import { httpError, jsonResponse, textResponse } from "./response.js";
 
 export const getslim = async ({ input, groups: { format }, request }) => {
   try {
-    const path =
-      format === "ndjson"
-        ? `.${input}`
-        : "." + input.replace(/\.json$/i, ".ndjson");
+    const path = format === "ndjson"
+      ? `.${input}`
+      : "." + input.replace(/\.json$/i, ".ndjson");
     const text = await Deno.readTextFile(path);
     if ("json" === format) {
       const arr = text.trim().split("\n").map(JSON.parse);
@@ -14,7 +13,7 @@ export const getslim = async ({ input, groups: { format }, request }) => {
     return textResponse(text);
   } catch (e) {
     if (e.name && /NotFound/.test(e.name)) {
-      return notFound({ request });
+      return httpError({ request, status: 404 });
     }
   }
 };
