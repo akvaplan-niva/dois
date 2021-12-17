@@ -1,7 +1,7 @@
 import { fix } from "./fix-map.js";
 import { cache } from "https://deno.land/x/cache@0.2.13/mod.ts";
 import { main } from "https://deno.land/x/newline@v0.2.0/nd-map/main.js";
-import { ndmapcommand as command } from "https://deno.land/x/newline@v0.1.0/nd-map/command.js";
+import { ndmapcommand as command } from "https://deno.land/x/newline@v0.2.0/nd-map/command.js";
 
 const base = "https://api.crossref.org";
 const isDOI = (s) => /^(https:\/\/doi.org\/)?10\./.test(String(s).trim());
