@@ -4,12 +4,12 @@ import { count } from "./reduce/count.js";
 import { group } from "./reduce/group.js";
 
 const root = async (/*{ request }*/) => {
-  const readme = new URL("readme.html", import.meta.url);
+  const readmeURL = new URL("readme.html", import.meta.url);
   const headers = new Headers({
     "content-type": `text/html; charset=utf-8`,
   });
-  const r = await fetch(readme);
-  return new Response(r.body, { headers });
+  const readme = await Deno.readTextFile(readmeURL);
+  return new Response(readme, { headers });
 };
 //jsonResponse({ links: { self: new URL(request.url) } });
 
