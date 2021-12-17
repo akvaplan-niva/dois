@@ -1,10 +1,13 @@
 # Akvaplan-niva DOIs
 
-The git repository [akvaplan-niva/dois](https://github.com/akvaplan-niva/dois) contains Akvaplan-niva related publications with a DOI.
+This [git repository](https://github.com/akvaplan-niva/dois) contains metadata for Akvaplan-niva publications with a DOI, and used in https://akvaplan.app/pubs.
 
-### Slim metadata
+The output data is automatically pushed to a [Deno Deploy](https://deno.com/deploy) service: https://dois.deno.dev/
+([source](deno/deploy.js))
 
-The [DOI pipeline](bin/doi-pipeline) yields one newline delimited JSON file per year, containing _slim_ metadata like:
+## Output format
+
+The [DOI pipeline](bin/doi-pipeline) yields one newline delimited JSON file per year, containing _slim_ metadata, [like](https://dois.deno.dev/doi/10.3389/fenvs.2021.662168):
 
 ```json
 {
@@ -20,6 +23,7 @@ The [DOI pipeline](bin/doi-pipeline) yields one newline delimited JSON file per 
     { "family": "Halsband", "given": "Claudia" }
   ],
   "doi": "10.3389/fenvs.2021.662168",
+  "license": "cc-by",
   "open": true,
   "pdf": "https://www.frontiersin.org/articles/10.3389/fenvs.2021.662168/pdf"
 }
@@ -27,11 +31,11 @@ The [DOI pipeline](bin/doi-pipeline) yields one newline delimited JSON file per 
 
 ## Use
 
-### Add DOI
+### Add DOI(s)
 
-Add/edit NDJSON file in the [`doi/year`] folder and run pipeline:
+Add/edit a NDJSON file in `doi/*/*.ndjson` and run pipeline:
 
-```bash
+```sh
 ./bin/doi-pipeline
 ```
 
@@ -43,9 +47,11 @@ The DOI pipeline consists of the following steps:
 
 First, create list of unique DOIs
 
-- Extract DOIs from [`raw`] text references
-- Add these into the NDJSON-formatted DOIs in [`doi`]
+- Extract DOIs from [`raw`](raw) text references
+- Add these into the NDJSON-formatted DOIs in [`doi`](doi)
 - De-deplicate the DOIs
+
+(The raw text references were augmented with DOIs from Crossref's [SimpleTextQuery](https://apps.crossref.org/SimpleTextQuery), when missing in in the original source.)
 
 ### 2. Fetch metadata
 
@@ -57,10 +63,7 @@ For each DOI
 
 > Notice: The pipeline aggressively caches all HTTP responses, calling the APIs just once per DOI across all invocations. On linux, the cache is located in `$HOME/.cache/deno/https/api.*.org`.
 
-JSON metadata from Crossref is stored in: `crossref/akvaplan-works.ndjson` (not in git)
-Unpaywall PDF links are unpaywall/akvaplan-pdfs.js
-
-### Create slim metadata product
+### 3. Create slim metadata product
 
 Finally
 
