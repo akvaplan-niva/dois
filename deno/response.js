@@ -2,25 +2,20 @@ import { STATUS_TEXT } from "https://deno.land/std@0.117.0/http/http_status.ts";
 
 export const statusText = ({ status }) => STATUS_TEXT.get(status);
 
+export const corsHeaders = ({ contentType }) =>
+  new Headers({
+    "content-type": `${contentType}; charset=utf-8`,
+    "access-control-allow-origin": "*",
+  });
+
 export const httpError = ({ request, status }) =>
   new Response(`${status} ${statusText({ status })}\n${request.url}\n`, {
     status,
   });
 
-export const notFound = ({ request }) => httpError({ request, status: 404 });
-
-export const jsonApiResponse = (o) =>
-  new Response(JSON.stringify(o), {
-    headers: {
-      "content-type": "application/vnd.api+json; charset=utf-8",
-    },
-  });
-
 export const jsonResponse = (o) =>
   new Response(JSON.stringify(o), {
-    headers: {
-      "content-type": "application/json; charset=utf-8",
-    },
+    headers: corsHeaders({ contentType: "application/json" }),
   });
 
 export const textResponse = (text) =>

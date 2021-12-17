@@ -1,34 +1,53 @@
-import { jsonResponse, httpError } from "./response.js";
+import { httpError, jsonResponse } from "./response.js";
 import { doimap } from "./doi-map.js";
 
-const config = { limit: 1, format: "json" };
-
-const validateRequest = ({ url }) => {
-  return { status: 400 };
+const config = {
+  limit: 10,
+  format: "json",
+  sort: "-published",
 };
 
-export const getdoi = ({ /*input,*/ groups: { prefix, suffix }, request }) => {
+const validateRequest = ({ url }) => {
+  return { status: 200 };
+};
+
+export const getdoi = ({ groups: { prefix, suffix }, request }) => {
   const doi = `${prefix}/${suffix}`.toLowerCase();
   return doimap.has(doi)
     ? jsonResponse(doimap.get(doi))
     : httpError({ request, status: 404 });
 };
 
-const stringSortFactory = ({ key, dir = 1 } = {}) => (a, b) =>
-  dir * a?.[key]?.localeCompare(b?.[key]);
+const stringSortFactory = ({ key, dir = 1 } = {}) =>
+  (a, b) => dir * a?.[key]?.localeCompare(b?.[key]);
+
+const forceDefaultParams = ({ url }) => {
+  const { searchParams } = url;
+  ["limit", "format", "sort"].map((k) => {
+    if (!searchParams.has(k)) {
+      searchParams.set(k, config?.[k]);
+    }
+  });
+  return url;
+};
 
 export const getdois = ({ request, url, groups }) => {
-  const { status } = validateRequest({ request });
-  const limit = url.searchParams.get("limit") ?? config.limit;
-  const format = url.searchParams.get("format") ?? config.format;
+  //const { status } = validateRequest({ request });
+  url = forceDefaultParams({ url });
+
+  const limit = url.searchParams.get("limit");
+  const format = url.searchParams.get("format");
+  const sort = url.searchParams.get("sort");
+  const dir = /^-/.test(sort) ? -1 : 1;
+  const key = sort.replace(/^-/, "");
+
+  const links = { self: url };
   const data = [...doimap.values()]
-    .sort(stringSortFactory({ key: "title" }))
+    .sort(stringSortFactory({ key, dir }))
     .slice(0, limit);
+
   if ("json" === format) {
-    return jsonResponse({
-      data,
-    });
+    return jsonResponse({ links, data });
   }
-  console.warn(data);
   return new Response(data.map(JSON.stringify).join("\n"));
 };
