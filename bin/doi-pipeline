@@ -2,6 +2,9 @@
 mkdir -p slim crossref unpaywall
 rm -rf crossref/* slim/*
 
+# Fetch/refresh ORCID data
+./bin/orcid_fetch_apn_authors
+
 # Extract DOIs from raw publication references
 cat raw/*.txt | ./bin/raw2doi | ./bin/crossref-works  \
   | nd-map d.DOI | sort | uniq > doi/misc/_raw.ndjson

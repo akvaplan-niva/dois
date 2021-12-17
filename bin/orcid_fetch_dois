@@ -1,0 +1,4 @@
+#!/bin/bash
+curl -s "https://orcid.org/$1/worksPage.json?offset=0&sort=date&sortAsc=false&pageSize=100" \
+  | nd-map 'd.groups.map(g => g.externalIdentifiers.map(e=>e.normalized).filter(s => s?.errors?.length === 0 ?? true )).map(e => log(stringify(e[0]?.value))),undefined' \
+  | grep -v undefined |  grep -E '10\.'

@@ -1,4 +1,9 @@
 #!/bin/bash
+# nd-filter -t '/doi\.org/i.test(d) || /10\..+/.test(d)' \
+#   | nd-group 'd.match(/10\.[^/]+\/.+/)' | nd-filter 'd[0] !== null' | nd-map 'd[0][0].replace(/\.$/, "")' \
+#   | nd-uniq --sort
+
+# More precise DOI matching
 nd-filter -t '/doi\.org/i.test(d) || /10\..+/.test(d)' \
-  | nd-group 'd.match(/10\.[^/]+\/.+/)' | nd-filter 'd[0] !== null' | nd-map 'd[0][0].replace(/\.$/, "")' \
-  | nd-uniq --sort
+  | nd-group 'd.match(/10\.[^/\s]+\/[^\s"]+[^.]/)' | nd-filter 'd[0] !== null' \
+  | nd-map 'd[0][0].trim().toLowerCase()' | nd-uniq --sort

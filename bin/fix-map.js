@@ -79,6 +79,7 @@ export const fixmap = new Map([
 // ["10.1093/plankt/fbw024",["A majorCalanus finmarchicusoverwintering population inside a deep fjord in northern Norway: implications for cod larvae recruitment success"]]
 
 // Needs title fix:
+// "doi": "10.11646/zootaxa.4018.3.6","title": "<p><strong>A new genus and family of copepods (Crustacea: Copepoda) parasitic </strong><br /><strong>on polychaetes of the genus <em>Jasmineira</em> Langerhans, 1880 (family Sabellidae) </strong><strong>in the northeastern Atlantic</strong></p>",
 // "Climatic and ecological drivers of euphausiid community structure vary spatially in the Barents Sea: relationships from a long time series (1952â€“2009)"
 
 // "A huge biocatalytic filter in the centre of Barents Sea shelf?**The present paper was based on the BANKMOD bilateral Norwegian – Polish projects (NFR 184719) and was completed thanks to additional financial support from the Polish Ministry of Science and Higher Education (384/W-Bankmod/2009/0 and 382/W-Akvaplan-niva/2009/0)"
@@ -92,7 +93,13 @@ export const fixmap = new Map([
 
 export const fix = (work) => {
   work = JSON.parse(JSON.stringify(work));
-  work.title = work?.title.map((t) => t.replace(/\s{2,}/g, " "));
+  work.type = "reference-book" === work.type ? "book" : work.type;
+  work.title = work?.title.map((t) =>
+    t
+      .replace(/\s{2,}/g, " ")
+      .replace("<title>", "")
+      .replace("</title>", "")
+  );
   if (fixmap.has(work?.DOI)) {
     const fixes = fixmap.get(work.DOI);
     const fixed = { ...work, ...fixes };
