@@ -1,33 +1,123 @@
+Blévin, P., Shaffer, S., Bustamante, P., Angelier, F., Picard, B., Herzke, D., Moe, B., Gabrielsen, G.W., Bustnes, J.O., Chastel, O., 2020. Contaminants, prolactin and parental care in an Arctic seabird: Contrasted associations of perfluoroalkyl substances and organochlorine compounds with egg-turning behaviour. General and Comparative Endocrinology 291, 113420.
 10.1016/j.ygcen.2020.113420
 
-Blévin, P., Shaffer, S., Bustamante, P., Angelier, F., Picard, B., Herzke, D., Moe, B., Gabrielsen, G.W., Bustnes, J.O., Chastel, O., 2020. Contaminants, prolactin and parental care in an Arctic seabird: Contrasted associations of perfluoroalkyl substances and organochlorine compounds with egg-turning behaviour. General and Comparative Endocrinology 291, 113420.
-
-
-
+Sebastiano, M., Angelier, F., Blévin, P., Ribout, C., Sagerup, K., Descamps, S., Herzke, D., Barbraud, C., Bustnes, J.O., Gabrielsen, G.W., Chastel, O., 2020. Exposure to PFAS is associated with telomere length dynamics and demographic responses of an arctic top predator. Environmental Science & Technology
 10.1021/acs.est.0c03099
 
-Sebastiano, M., Angelier, F., Blévin, P., Ribout, C., Sagerup, K., Descamps, S., Herzke, D., Barbraud, C., Bustnes, J.O., Gabrielsen, G.W., Chastel, O., 2020. Exposure to PFAS is associated with telomere length dynamics and demographic responses of an arctic top predator. Environmental Science & Technology
-
-
-
-10.1016/j.scitotenv.2020.144611
 
 Sebastiano, M., Jouanneau, W., Blévin, P., Angelier, F., Parenteau, C., Gernigon, J., Lemesle J.C., Robin, F., Pardon, P., Budzinski, H., Labadie, P., Chastel, O., 2021. High levels of fluoroalkyl substances and potential disruption of thyroid hormones in three gull species from Southern Western France. Science of the Total Environment
+10.1016/j.scitotenv.2020.144611
 
-
-
-10.1007/s00300-021-02869-6
 
 Aniceto, S., Tassara, L., Rikardsen, A., Blévin, P., 2021. Mass strandings of large whales in Norway call for further investigation. Polar Biology
-
-
-
-10.1002/ece3.7523
+10.1007/s00300-021-02869-6
 
 Bories, P., Rikardsen, A., Leonard, P., Fisk, A., Tartu, S., Vogel, E., Bytingsvik, J., Blévin, P., 2021. A deep dive into fat: Investigating blubber lipidomics fingerprint of killer whales and humpback whales in northern Norway. Ecology & Evolution
-
-
-
-10.1186/s40317-021-00240-4
+10.1002/ece3.7523
 
 Shaffer, S., Blévin, P., Barbraud, C., Chastel, O., Weimerskirch, H. Comparative egg attendance patterns of incubating polar petrels. 2021., Animal Biotelemetry
+10.1186/s40317-021-00240-4
+
+https://www.pierreblevin.com/publications
+
+26) Bertrand, P., Bety, J., Yoccoz, NG., Fortin, MJ., Strøm, H., Steen, H., Kohler, J., Harris, S., Patrick, S., Chastel, O., Blévin, P., Moholdt, G., Maton, J., Descamps, S., 2021. Fine-scale spatial segregation in a pelagic seabird driven by differential use of tidewater glacier fronts. Scientific Reports
+10.1038/s41598-021-01404-1
+ 
+
+25) Léandri-Breton, D.J., Tarroux, A., Elliott, K., Legagneux, P., Angelier, F., Blévin, P., Bråthen, V.S., Fauchald, P., Goutte, A., Jouanneau, W., Tartu, S., Moe, B., Chastel, O., 2021. Long-term tracking of an Arctic-breeding seabird indicates high fidelity for pelagic wintering areas. Marine Ecology Progress Series
+10.3354/meps13798
+ 
+
+24) Shaffer, S., Blévin, P., Barbraud, C., Chastel, O., Weimerskirch, H. 2021. Comparative egg attendance patterns of incubating polar petrels. Animal Biotelemetry.
+
+ 
+
+23) Bories, P., Rikardsen, A., Leonard, P., Fisk, A., Tartu, S., Vogel, E., Bytingsvik, J., Blévin, P. 2021. A deep dive into fat: Investigating blubber lipidomics fingerprint of killer whales and humpback whales in northern Norway. Ecology & Evolution
+
+ 
+
+22) Aniceto, S., Tassara, L., Rikardsen, A., Blévin, P., 2021. Mass strandings of large whales in Norway call for further investigation. Polar Biology
+
+ 
+
+21) Sebastiano, M., Jouanneau, W., Blévin, P., Angelier, F., Parenteau, C., Gernigon, J., Lemesle J.C., Robin, F., Pardon, P., Budzinski, H., Labadie, P., Chastel, O., 2021. High levels of fluoroalkyl substances and potential disruption of thyroid hormones in three gull species from Southern Western France. Science of the Total Environment. 
+
+​
+
+20) Sebastiano, M., Angelier, F., Blévin, P., Ribout, C., Sagerup, K., Descamps, S., Herzke, Moe, B., Barbraud, C., Bustnes, J.O., Chastel, O., 2020. Exposure to PFAS is associated with telomere length dynamics and demographic responses of an arctic top predator, Environmental Science & Technology
+
+ 
+
+19) Blévin, P., Shaffer, A., Bustamante, P., Angelier, F., Picard, B., Herzke, D., Moe, B., Gabrielsen, G., Bustnes, J.O., Chastel, O., 2020. Contaminants, prolactin and parental care in an Arctic seabird: Contrasted associations of perfluoroalkyl substances and organochlorine compounds with egg turning behavior, General and Comparative Endocrinology.
+
+ 
+
+18) Blévin, P., Aars, J., Andersen, M., Blanchet, M-A., Hanssen, L., Herzke, D., Jeffreys, R., Nordøy, E., Pinzone, M., De la Vega, C., Routti, H., 2020. Pelagic vs coastal – Key drivers of pollutant levels in Barents Sea polar bears with different space-use strategies? Environmental Science & Technology
+
+​
+
+17) Heerah, K., Cox, S.L., Blévin, P., Guinet, C., Charrassin, JB., 2019. Validation of dive foraging indices using archived and transmitted acceleration data: the case of the Weddell. Frontiers Ecology and Evolution.
+
+ 
+
+16) Blévin, P., Shaffer, S., Bustamante, P., Angelier, F., Picard, B., Herzke, D., Moe, B., Gabrielsen, G.W., Bustnes, J.O., Chastel, O., 2018. Organochlorines, perfluoroalkyl substances, mercury and egg incubation temperature in an Arctic seabird: insight from data loggers. Environmental Toxicology and Chemistry.
+
+ 
+
+15) Costantini, D., Blévin, P., Herzke, D., Moe, B., Gabrielsen, G.W., Bustnes, J.O., Chastel, O., 2018. Higher oxidative damage and lower antioxidant defences in an Arctic seabird exposed to longer perfluoroalkyl acids. Environmental Research.
+
+ 
+
+14) Guilleminot-Humann, S., Blévin, P., Azou-Barré, A., Yacoumas, A., Gabrielsen, G.W., Chastel, O., Helfenstein, F., 2018. Sperm collection in black-legged kittiwakes and characterization of sperm velocity and morphology. Avian Research.
+
+ 
+
+13) Haar, A., Hylland, K., Eckbo, N., Gabrielsen, G.W., Herzke, D., Bustnes, J.O., Blévin, P., Chastel, O., Moe, B., Hanssen, S.A., Sagerup, K., Borgå, K., 2017. DNA damage in Arctic seabirds: Baseline, sensitivity to a genotoxic stressor and association to organohalogens contaminants. Environmental Toxicology and Chemistry.
+
+ 
+
+12) Angelier, F., Costantini, D., Blévin, P., Chastel, O., 2017. Do glucocorticoids mediate the link between environmental conditions and telomere dynamics in wild vertebrates? A review. General and Comparative Endocrinology.
+
+ 
+
+11) Blévin, P., Angelier, F., Tartu, S., Bustamante, P., Herzke, D., Moe, B., Bech, C., Gabrielsen, G.W., Bustnes, J.O., Chastel, O., 2017. Perfluorinated substances and telomeres in an Arctic seabird: Cross-sectional and longitudinal approaches. Environmental Pollution.
+
+ 
+
+10) Blévin, P., Tartu, S., Ellis, H.I., Chastel, O., Bustamante, P., Parenteau, C., Herzke, D., Angelier, F., Gabrielsen, G.W., 2017. Contaminants and energy expenditure in an Arctic seabird: Organochlorine pesticides and perfluoroalkyl substances are associated with metabolic rate in a contrasted manner. Environmental Research.
+
+ 
+
+9) Sebastiano, M., Bustamante, P., Eulaers, I., Malarvannan, G., Mendez-Fernandez, P., Churlaud, C., Blévin, P., Hauselmann, A., Covaci, A., Eens, M., 2017. Trophic ecology drives contaminant concentrations within a tropical seabird community. Environmental Pollution.
+
+ 
+
+8) Blévin, P., Angelier, F., Tartu, S., Ruault, S., Bustamante, P., Herzke, D., Moe, B., Bech, C., Gabrielsen, G.W., Bustnes, J.O., 2016. Exposure to oxychlordane is associated with shorter telomeres in arctic breeding kittiwakes. Science of the Total Environment.
+
+ 
+
+7) Sebastiano, M., Bustamante, P., Costantini, D., Eulaers, I., Malarvannan, G., Mendez-Fernandez, P., Churlaud, C., Blévin, P., Hauselmann, A., Dell’Omo, G., 2016. High levels of mercury and low levels of persistent organic pollutants in a tropical seabird in French Guiana, the Magnificent frigatebird, Fregata magnificens. Environmental Pollution.
+
+ 
+
+6) Tartu, S., Bustamante, P., Angelier, F., Lendvai, A.Z., Moe, B., Blévin, P., Bech, C., Gabrielsen, G.W., Bustnes, J.O., Chastel, O., 2016. Mercury exposure, stress and prolactin secretion in an Arctic seabird: an experimental study. Functional Ecology.
+
+ 
+
+5) Tartu, S., Lendvai, Á.Z., Blévin, P., Herzke, D., Bustamante, P., Moe, B., Gabrielsen, G.W., Bustnes, J.O., Chastel, O., 2015. Increased adrenal responsiveness and delayed hatching date in relation to polychlorinated biphenyl exposure in Arctic-breeding black-legged kittiwakes (Rissa tridactyla). General and Comparative Endocrinology.
+
+ 
+
+4) Blévin, P., Tartu, S., Angelier, F., Leclaire, S., Bustnes, J.O., Moe, B., Herzke, D., Gabrielsen, G.W., Chastel, O., 2014. Integument colouration in relation to persistent organic pollutants and body condition in arctic breeding black-legged kittiwakes (Rissa tridactyla). Science of the Total Environment.
+
+ 
+
+3) Tartu, S., Gabrielsen, G.W., Blévin, P., Ellis, H., Bustnes, J.O., Herzke, D., Chastel, O., 2014. Endocrine and fitness correlates of long-chain perfluorinated carboxylates exposure in Arctic breeding black-legged kittiwakes. Environmental Science & Technology.
+
+ 
+
+2) Carravieri, A., Cherel, Y., Blévin, P., Brault-Favrou, M., Chastel, O., Bustamante, P., 2014. Mercury exposure in a large subantarctic avian community. Environmental Pollution.
+
+ 
+
+1) Blévin, P., Carravieri, A., Jaeger, A., Chastel, O., Bustamante, P., Cherel, Y., 2013. Wide range of mercury contamination in chicks of Southern Ocean seabirds. PLoS One.
