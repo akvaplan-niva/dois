@@ -30,6 +30,7 @@ Frantzen, M., I-.B.  Falk-Pettersen, J. Nahrgang, T. Smith, G. H. Olsen, T. A.
 https://doi.org/10.1016/j.aquatox.2011.09.022
 
 Fretwell, P., H.D. Pritchard, D.G. Vaughan, J.L. Bamber, N.E. Barrand, R. Bell, C. Bianchi, R.G. Bingham, D.D. Blankenship, G. Casassa, G. Catania, D. Callens, H. Conway, A.J. Cook, H.F.J. Corr, D.Damaske, V. Damm, F. Ferraccioli, R. Forsberg, S. Fujita, P. Gogineni, J.A. Griggs, R.C.A. Hindmarsh, P. Holmlund, J.W. Holt, R.W. Jacobel, A. Jenkins, W. Jokat, T. Jordan, E.C. King, J. Kohler, W. Krabill, M. Riger-Kusk, K.A. Langley, G. Leitchenkov, C. Leuschen, B.P. Luyendyk, K. Matsuoka, Y. Nogi, O.A. Nøst, S.V. Popov, E. Rignot, D.M. Rippin, A. Riviera, J. Roberts, N. Ross, M.J. Siegert, A.M. Smith, D. Steinhage, M. Studinger, B. Sun, B.K. Tinto, B.C. Welch, D. Young, C. Xiangbin, and A. Zirizzotti 2012. Bedmap2: improved ice bed, surface and thickness datasets for Antarctica., The Cryosphere Discuss. 6, 4305-4361.
+https://doi.org/10.5194/tcd-6-4305-2012
 https://doi.org/10.5194/tcd-6-4305-2012-supplement
 
 Gunnarsson, S., Imsland, A.K., Arnarson, I., Siikavuopio, S.I., Gústavsson, A. and Thorarensen, H. 2012. Enhanced growth of farmed Arctic charr (Salvelinus alpinus) following a temporal treatment of short day photoperiod. Aquaculture 350-353, 75-81.
