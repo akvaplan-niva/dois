@@ -1,3 +1,6 @@
+Bedmap2: improved ice bed, surface and thickness datasets for Antarctica
+https://doi.org/10.5194/tc-7-375-2013
+
 https://akvaplan.sharepoint.com/:w:/r/sites/company/8/74/_layouts/15/Doc.aspx?sourcedoc=%7BF907D29D-7B98-4CC2-B6D6-5DF8E8FABAC9%7D&file=APN%20publikasjoner%202013.docx&action=default&mobileredirect=true&DefaultItemOpen=1
 Artikler 2013
 
