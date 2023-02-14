@@ -19,7 +19,7 @@ const _patternHandlers = [
     pattern: { pathname: "/doi" },
     handler: getdois,
   },
-  { pattern: { pathname: "/doi/:prefix/:suffix" }, handler: getdoi },
+  { pattern: { pathname: "/doi/:prefix/:suffix*" }, handler: getdoi },
   {
     pattern: { pathname: "/slim/:basename.:format(ndjson|json)" },
     handler: getslim,
