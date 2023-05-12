@@ -2,10 +2,11 @@
 
 nd-map '{patches} = await import(Deno.cwd()+"/deno/patch/patches.js"),
 authors = (d.author??[]).map(({family,given,name,sequence})=>({ family, given, name, first: sequence === "first" ? true : undefined })),
+
   doi = d.DOI,
   title = d.title && d.title.length ? d.title.join(" | ") : doi,
   container = d["container-title"] ? d["container-title"][0] : null,
-  type = d.type,
+  type = "preprint" === d?.subtype ? d.subtype : d.type,
 
   iso = (p,i=0) => p.map(n => 0===i++ ? String(n) : String(n).padStart(2,"0")).join("-"),
   online = d["published-online"] ? d["published-online"]["date-parts"][0] : [],

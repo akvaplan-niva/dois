@@ -1,2 +1,2 @@
-The following tool wascused to find DOIs when these were missing in raw text references:
+The following tool was used to find DOIs when missing in raw text references:
 https://apps.crossref.org/SimpleTextQuery

@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/usr/bin/env bash
 nd-map '{ year: d.published?.substring(0,4) ?? null}' | nd-count

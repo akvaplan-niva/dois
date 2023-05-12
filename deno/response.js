@@ -26,7 +26,7 @@ export const textResponse = (text) =>
   });
 
 // const ndjsonResponse = (a) => {
-//   const ndjson = (o) => JSON.stringify(o) + "\n";
+//
 //   const text = a.map(ndjson).join("");
 //   return new Response(text, {
 //     headers: {

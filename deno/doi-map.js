@@ -1,6 +1,6 @@
 export const doimap = new Map();
 
-export const init = async ({ doimap, dir }) => {
+export const initDOIMapFromNDJSONFilesInDir = async ({ doimap, dir }) => {
   for await (const { name, isFile } of Deno.readDir(dir)) {
     if (isFile) {
       const text = (await Deno.readTextFile(`${dir}/${name}`)).trim();

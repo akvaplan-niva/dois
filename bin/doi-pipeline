@@ -1,9 +1,15 @@
-#!/bin/bash
+#!/usr/bin/env bash
 mkdir -p slim crossref unpaywall
 rm -rf crossref/* slim/*
 
+# Fetch CRISTIN data
+./bin/cristin
+
 # Fetch/refresh ORCID data
 ./bin/orcid_fetch_apn_authors
+
+# Fetch fresh OpenAlex data
+./bin/openalex_pipeline
 
 # Extract DOIs from raw publication references
 cat raw/*.txt | ./bin/raw2doi | ./bin/crossref-works  \
@@ -17,19 +23,20 @@ cat doi/*/*.ndjson | sort | uniq | ./bin/crossref-works 2> crossref/errors.txt \
 # Create Crossref slim
 cat crossref/akvaplan-works.ndjson | ./bin/crossref-slim > crossref/akvaplan-slim.ndjson
 
-# Get pdf from Unpaywall
-cat crossref/akvaplan-slim.ndjson | nd-map '`https://api.unpaywall.org/v2/doi/${d.doi}?email=info@akvaplan.niva.no`' | nd-fetch  --cache | nd-map '{doi} = d,
-best_oa_pdf = d?.best_oa_location?.url_for_pdf,
-pdf = best_oa_pdf ? best_oa_pdf : d?.oa_locations?.map(({ url_for_pdf }) => url_for_pdf).find((url) => url !== null),
-pdf ? { doi, pdf } : undefined' > unpaywall/akvaplan-pdfs.js
+# Get pdf url from Unpaywall
+cat crossref/akvaplan-slim.ndjson | ./bin/unpaywall_pdfs > unpaywall/akvaplan-pdfs.ndjson
 
-# Create slim metadata
-# 1. JOIN Crossref slim and Unpaywall pdf
-# 2. Partition by year
-cat crossref/akvaplan-slim.ndjson unpaywall/akvaplan-pdfs.js | nd-group d.doi | nd-map 'pdfidx =d[1].findIndex(({pdf}) => pdf !== undefined ), slimidx = pdfidx === 0 ? 1 : 0, pdf = d[1][pdfidx], slim = d[1][slimidx], { ...slim, ...pdf }' | ./bin/partition-slim-by-year
+# Citation counts from OpenAlex
+
+# Create slim metadata 
+./bin/slim-join-pipeline \
+| ./bin/ignore \
+| ./bin/partition-slim-by-year
 
 # Show summary counts
 ./bin/slim-counts
 
 # Verify SHA checksums
-./bin/verify-checksums
+# ./bin/verify-checksums
+
+#./bin/count-author-collab | nd-filter 'd.count>=3' | nd-map 'values(d)'> collab/author-collab-gt3.ndjson

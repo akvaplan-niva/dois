@@ -1,2 +1,9 @@
-#!/bin/bash
-nd-map 'd.authors.map( ({family, given}) => ({family, given}))' | ndjson-split | nd-sort --on family | nd-count --sort --reverse
+#!/usr/bin/env bash
+nd-map 'normalizeName = ({ name, family, given } = {}) =>
+  name ?? `${family} ${given?.substring(0, 1)}`.toUpperCase()
+  .replace("HALSBAND-LENK", "HALSBAND")
+  .normalize("NFD").replace(/\p{Diacritic}/gu, ""),
+
+authors = d.authors.map(normalizeName),
+authors.map(name => log(stringify({name}))),undefined' \
+| nd-count --sort --reverse

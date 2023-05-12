@@ -1,5 +1,13 @@
-#!/bin/bash
-./bin/orcid_fetch_dois 0000-0002-1530-6016 > doi/author/carroll_michael_orcid_0000-0002-1530-6016.ndjson
-./bin/orcid_fetch_dois 0000-0002-8570-9056 > doi/author/halsband_claudia_orcid_0000-0002-8570-9056.ndjson
-ID="0000-0002-8570-9056" && ./bin/orcid_fetch_dois $ID > "doi/author/halsband_claudia_orcid_$ID.ndjson"
-./bin/orcid_fetch_dois 0000-0002-6598-0818 > doi/author/carroll_jolynn_orcid_0000-0002-6598-0818.ndjson
+#!/usr/bin/env bash
+echo  "Before"
+wc -l doi/author/*orcid*
+
+./bin/orcid_fetch_dois 0000-0002-1530-6016 > doi/author/_carroll_michael_orcid_0000-0002-1530-6016.ndjson
+./bin/orcid_fetch_dois 0000-0002-8570-9056 > doi/author/_halsband_claudia_orcid_0000-0002-8570-9056.ndjson
+ID="0000-0002-8570-9056" && ./bin/orcid_fetch_dois $ID > "doi/author/_halsband_claudia_orcid_$ID.ndjson"
+./bin/orcid_fetch_dois 0000-0002-6598-0818 > doi/author/_carroll_jolynn_orcid_0000-0002-6598-0818.ndjson
+ID="0000-0002-5328-3396" && ./bin/orcid_fetch_dois $ID > "doi/author/_leu_eva_$ID.ndjson"
+
+echo "After"
+wc -l doi/author/*orcid*
+

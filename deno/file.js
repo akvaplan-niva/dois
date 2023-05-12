@@ -1,6 +1,22 @@
 import { jsonResponse } from "./response.js";
 
+export const path = ({ name, dir = Deno.cwd() } = {}) => `${dir}/${name ?? ""}`;
+
 export const dir = `./slim`;
+
+export async function* files({ dir }) {
+  const dirIter = Deno.readDir(dir);
+  for await (const { name, isFile, ...meta } of dirIter) {
+    if (isFile) {
+      yield { name, ...meta };
+    }
+  }
+}
+
+export const readNDJSONFile = async (args) => {
+  const text = await Deno.readTextFile(args);
+  return text.trim().split("\n").map(JSON.parse);
+};
 
 export const filesInDir = async ({ dir }) => {
   const _f = [];

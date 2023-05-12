@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/usr/bin/env bash
 nd-group d.container | nd-map '{ container: d[0], count: d[1].length }' | nd-sort --numeric --on count --reverse

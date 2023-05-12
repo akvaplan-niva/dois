@@ -1,7 +1,7 @@
 import { jsonResponse } from "../response.js";
 import { doimap } from "../doi-map.js";
 
-const groupMapFactory = ({ groupkey }) => (grmap, d) => {
+const groupReducerFactory = ({ groupkey }) => (grmap, d) => {
   const grkey = groupkey(d);
   if (!grmap.has(grkey)) {
     grmap.set(grkey, [d]);
@@ -15,7 +15,7 @@ export const preprocess = ({ doimap, key, searchParams }) => {
   const mapper = !searchParams.has("fields[slim]")
     ? (d) => d
     : (d) => {
-        const d2 = {};
+        const d2 = { [key]: d[key] }; // always include the member grouped on
         searchParams
           .get("fields[slim]")
           .split(",")
@@ -31,7 +31,7 @@ export const preprocess = ({ doimap, key, searchParams }) => {
 export const group = async ({ groups: { key, action, params }, url }) => {
   const { searchParams } = url;
   const prep = preprocess({ doimap, key, searchParams });
-  console.warn({ key, params, action });
+
   params = params?.split(",").map(Number);
   const groupkey =
     "substring" !== action
@@ -40,7 +40,7 @@ export const group = async ({ groups: { key, action, params }, url }) => {
           return d?.[key]?.substring(...params) ?? null;
         };
 
-  const groupMap = prep.reduce(groupMapFactory({ groupkey }), new Map());
+  const groupMap = prep.reduce(groupReducerFactory({ groupkey }), new Map());
   return jsonResponse({
     links: { self: url },
     data: [...groupMap.entries()],

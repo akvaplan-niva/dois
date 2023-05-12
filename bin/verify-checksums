@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 source ./bin/sha_expected
 sha_works=`cat crossref/akvaplan-works.ndjson | nd-map d.DOI | sort | sha1sum |  cut -d' ' -f1`
 sha_slim=`cat slim/* | nd-map d.doi | sort | sha1sum |  cut -d' ' -f1`

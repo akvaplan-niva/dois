@@ -1,8 +1,7 @@
-import { serve } from "https://deno.land/std@0.117.0/http/server.ts";
-import { doimap, init } from "./doi-map.js";
-import { dir } from "./file.js";
 import { routes } from "./routes.js";
 import { corsHeaders, httpError } from "./response.js";
+
+import { serve } from "https://deno.land/std@0.158.0/http/server.ts";
 
 const validateRequest = ({ request }) => {
   if (!/(get|head|options)/i.test(request.method)) {
@@ -10,8 +9,6 @@ const validateRequest = ({ request }) => {
   }
   return { status: 200 };
 };
-
-await init({ doimap, dir });
 
 await serve((request) => {
   const { status } = validateRequest({ request });

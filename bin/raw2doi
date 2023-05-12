@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # nd-filter -t '/doi\.org/i.test(d) || /10\..+/.test(d)' \
 #   | nd-group 'd.match(/10\.[^/]+\/.+/)' | nd-filter 'd[0] !== null' | nd-map 'd[0][0].replace(/\.$/, "")' \
 #   | nd-uniq --sort
