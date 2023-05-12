@@ -42,6 +42,7 @@ export const getdois = ({ request, url, groups }) => {
   const key = sort.replace(/^-/, "");
 
   const links = { self: url };
+
   const data = [...doimap.values()]
     .sort(stringSortFactory({ key, dir }))
     .slice(0, limit);
