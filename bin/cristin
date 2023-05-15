@@ -1,4 +1,4 @@
 #!/bin/bash
 curl -v https://cristin.deno.dev/akvaplanists/dois \
 | nd-map 'ndjson = (o) => log(stringify(o)), d.map( (person) => person.dois?.map(ndjson)),undefined' \
-> doi/misc/cristin.ndjson
+| sort > doi/misc/cristin.ndjson
