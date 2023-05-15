@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 nd-map '{patches} = await import(Deno.cwd()+"/deno/patch/patches.js"),
-authors = (d.author??[]).map(({family,given,name,sequence})=>({ family, given, name, first: sequence === "first" ? true : undefined })),
+authors = (d.author??[]).map(({family,given,name,sequence}) =>(
+  { family: family?.replace(/[0-9\*]/, ""), given, name, first: sequence === "first" ? true : undefined })),
 
   doi = d.DOI,
   title = d.title && d.title.length ? d.title.join(" | ") : doi,
