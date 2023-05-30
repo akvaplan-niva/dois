@@ -7,7 +7,9 @@ authors = (d.author??[]).map(({family,given,name,sequence}) =>(
   doi = d.DOI,
   title = d.title && d.title.length ? d.title.join(" | ") : doi,
   container = d["container-title"] ? d["container-title"][0] : null,
+
   type = "preprint" === d?.subtype ? d.subtype : d.type,
+  type = /errat(um|a)/i.test(title) ? "erratum": type,
 
   iso = (p,i=0) => p.map(n => 0===i++ ? String(n) : String(n).padStart(2,"0")).join("-"),
   online = d["published-online"] ? d["published-online"]["date-parts"][0] : [],
