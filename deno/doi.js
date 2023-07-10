@@ -1,3 +1,4 @@
+import { doimap, initDOIMapFromKV } from "./doi-map.js";
 import { httpError, jsonResponse } from "./response.js";
 
 const config = {
@@ -47,7 +48,10 @@ const forceDefaultParams = ({ url }) => {
 };
 
 export const getdois = async ({ kv, request, url, groups }) => {
-  //const { status } = validateRequest({ request });
+
+  if (doimap.size === 0) {
+    await initDOIMapFromKV({ kv, doimap });
+  }
   url = forceDefaultParams({ url });
 
   const limit = url.searchParams.get("limit");
@@ -58,12 +62,7 @@ export const getdois = async ({ kv, request, url, groups }) => {
 
   const links = { self: url };
 
-  const _data = [];
-  for await (const { value } of kv.list({ prefix: ["dois"] })) {
-    _data.push(value);
-  }
-
-  const data = _data
+  const data = [...doimap.values()]
     .sort(stringSortFactory({ key, dir }))
     .slice(0, limit);
 
