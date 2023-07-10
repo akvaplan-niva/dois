@@ -14,7 +14,7 @@ export const httpError = ({ request, status }) =>
   });
 
 export const jsonResponse = (o) =>
-  new Response(JSON.stringify(o), {
+  new Response(JSON.stringify(o) + "\n", {
     headers: corsHeaders({ contentType: "application/json" }),
   });
 

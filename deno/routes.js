@@ -1,9 +1,11 @@
 import { getdoi, getdois } from "./doi.js";
+//import { candidate } from "./candidate.js";
+import { seed } from "./seed.js";
 import { getslim } from "./slim.js";
 import { count } from "./reduce/count.js";
 import { group } from "./reduce/group.js";
 
-const root = async (/*{ request }*/) => {
+export const root = async (/*{ request }*/) => {
   const readmeURL = new URL("readme.html", import.meta.url);
   const headers = new Headers({
     "content-type": `text/html; charset=utf-8`,
@@ -20,6 +22,8 @@ const _patternHandlers = [
     handler: getdois,
   },
   { pattern: { pathname: "/doi/:prefix/:suffix*" }, handler: getdoi },
+
+  //{ pattern: { pathname: "/candidate/:prefix/:suffix*" }, handler: candidate },
   {
     pattern: { pathname: "/slim/:basename.:format(ndjson|json)" },
     handler: getslim,
@@ -31,6 +35,11 @@ const _patternHandlers = [
   {
     pattern: { pathname: "/group/:key/:action?/:params?" },
     handler: group,
+  },
+
+  {
+    pattern: { pathname: "/seed" },
+    handler: seed,
   },
   {
     pattern: { pathname: "/" },
