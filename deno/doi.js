@@ -54,7 +54,11 @@ export const getdois = async ({ kv, request, url, groups }) => {
   }
   url = forceDefaultParams({ url });
 
-  const limit = url.searchParams.get("limit");
+  const _limit = url.searchParams.has("limit")
+    ? url.searchParams.get("limit")
+    : doimap.size;
+  const limit = "-1" === _limit ? doimap.size : Number(_limit);
+  
   const format = url.searchParams.get("format");
   const sort = url.searchParams.get("sort");
   const dir = /^-/.test(sort) ? -1 : 1;
