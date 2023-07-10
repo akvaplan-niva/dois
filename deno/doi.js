@@ -1,5 +1,4 @@
 import { httpError, jsonResponse } from "./response.js";
-import { doimap } from "./doi-map.js";
 
 const config = {
   limit: 10,
@@ -11,15 +10,15 @@ const validateRequest = ({ url }) => {
   return { status: 200 };
 };
 
-export const getdoi = ({ groups: { prefix, suffix }, request }) => {
+export const getdoi = async ({ kv, groups: { prefix, suffix }, request }) => {
   const doi = `${prefix}/${suffix}`.toLowerCase();
-  return doimap.has(doi)
-    ? jsonResponse(doimap.get(doi))
-    : httpError({ request, status: 404 });
+  const { value } = await kv.get(["dois", doi]);
+  console.warn(value);
+  return value ? jsonResponse(value) : httpError({ request, status: 404 });
 };
 
-const stringSortFactory = ({ key, dir = 1 } = {}) =>
-  (a, b) => dir * a?.[key]?.localeCompare(b?.[key]);
+const stringSortFactory = ({ key, dir = 1 } = {}) => (a, b) =>
+  dir * a?.[key]?.localeCompare(b?.[key]);
 
 const forceDefaultParams = ({ url }) => {
   const { searchParams } = url;
@@ -31,7 +30,7 @@ const forceDefaultParams = ({ url }) => {
   return url;
 };
 
-export const getdois = ({ request, url, groups }) => {
+export const getdois = async ({ kv, request, url, groups }) => {
   //const { status } = validateRequest({ request });
   url = forceDefaultParams({ url });
 
@@ -43,7 +42,12 @@ export const getdois = ({ request, url, groups }) => {
 
   const links = { self: url };
 
-  const data = [...doimap.values()]
+  const _data = [];
+  for await (const { value } of kv.list({ prefix: ["dois"] })) {
+    _data.push(value);
+  }
+
+  const data = _data
     .sort(stringSortFactory({ key, dir }))
     .slice(0, limit);
 

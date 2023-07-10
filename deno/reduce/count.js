@@ -1,5 +1,5 @@
 import { jsonResponse } from "../response.js";
-import { doimap } from "../doi-map.js";
+import { doimap, initDOIMapFromKV } from "../doi-map.js";
 
 const countReducerFactory = ({ key }) => (count, d) => {
   if (!count.has(d[key])) {
@@ -10,7 +10,10 @@ const countReducerFactory = ({ key }) => (count, d) => {
   return count;
 };
 
-export const preprocess = ({ doimap, key, action, params }) => {
+export const preprocess = async ({ kv, doimap, key, action, params }) => {
+  if (doimap.size === 0) {
+    await initDOIMapFromKV({ kv, doimap });
+  }
   params = params?.split(",");
   if ("substring" === action) {
     params = params.map(Number);
@@ -21,8 +24,8 @@ export const preprocess = ({ doimap, key, action, params }) => {
   return [...doimap.values()];
 };
 
-export const count = async ({ groups: { key, action, params }, url }) => {
-  const prep = preprocess({ doimap, key, action, params });
+export const count = async ({ kv, groups: { key, action, params }, url }) => {
+  const prep = await preprocess({ kv, doimap, key, action, params });
   const countMap = prep.reduce(countReducerFactory({ key }), new Map());
   return jsonResponse({
     links: { self: url },

@@ -18,19 +18,34 @@ const wrong = JSON.parse(
 );
 
 const notitle = [
-  ["10.1023/a:1003013725472", { "title": "Soft-bottom macro invertebrate fauna of North Norwegian coastal waters with particular reference to sill-basins. Part one: Bottom topography and species diversity" }],
-  ["10.1023/a:1018328626979", { "title": "Growth and the effect of grading, of turbot in a shallow raceway system"}],
-  ["10.1023/a:1009265602388", { "title": "Effects of size grading on growth and survival of juvenile turbot at two temperatures"}],
+  ["10.1023/a:1003013725472", {
+    "title":
+      "Soft-bottom macro invertebrate fauna of North Norwegian coastal waters with particular reference to sill-basins. Part one: Bottom topography and species diversity",
+  }],
+  ["10.1023/a:1018328626979", {
+    "title":
+      "Growth and the effect of grading, of turbot in a shallow raceway system",
+  }],
+  ["10.1023/a:1009265602388", {
+    "title":
+      "Effects of size grading on growth and survival of juvenile turbot at two temperatures",
+  }],
   // ["10.1023/a:1008033201227"],
   //["10.1023/a:1008962601914"],
-  ["10.1023/a:1007815402911", { "title": "Hemoglobin genotypes of turbot (Scophthalmus maximus): consequences for growth and variations in optimal temperature for growth"}],
+  ["10.1023/a:1007815402911", {
+    "title":
+      "Hemoglobin genotypes of turbot (Scophthalmus maximus): consequences for growth and variations in optimal temperature for growth",
+  }],
   // ["10.1023/a:1014240430779"]
-  ["10.1023/a:1014473012572", { "title": "Intraspecific Variation in Trophic Feeding Levels and Organochlorine Concentrations in Glaucous Gulls (Larus hyperboreus) from Bjørnøya, the Barents Sea"}],
+  ["10.1023/a:1014473012572", {
+    "title":
+      "Intraspecific Variation in Trophic Feeding Levels and Organochlorine Concentrations in Glaucous Gulls (Larus hyperboreus) from Bjørnøya, the Barents Sea",
+  }],
   // ["10.1023/a:1020167027942"],
   // ["10.1023/a:1020315817235"],
   // ["10.1023/a:1025465705717"],
   // ["10.1023/a:1026373509576"]
-]
+];
 
 const misc = [
   ["10.1017/cbo9781316164624.008", { published: "2015" }], //Ocean Sustainability in the 21st Century
@@ -63,17 +78,18 @@ const misc = [
   ["10.3354/meps128001", {
     title:
       "Sources of primary production, benthic-pelagic coupling, and trophic relationships within the Northeast Water Polynya: insights from δ13C and δ15N analysis",
-  }]
+  }],
 ];
 
-const errata = [["10.1007/s10695-011-9545-5",{"type":"erratum"}], 
-  ["10.1016/j.aquatox.2009.10.013",{"type":"erratum"}], 
-  ["10.1016/j.ecss.2013.06.010",{"type":"erratum"}], 
-  ["10.1016/j.envpol.2016.12.062",{"type":"erratum"}], 
-  ["10.1016/j.seares.2023.102379",{"type":"erratum"}], 
-  ["10.1038/ncomms16126",{"type":"erratum"}], 
-  ["10.1016/j.pocean.2007.01.014",{"type":"erratum"}]
-]; 
+const errata = [
+  ["10.1007/s10695-011-9545-5", { "type": "erratum" }],
+  ["10.1016/j.aquatox.2009.10.013", { "type": "erratum" }],
+  ["10.1016/j.ecss.2013.06.010", { "type": "erratum" }],
+  ["10.1016/j.envpol.2016.12.062", { "type": "erratum" }],
+  ["10.1016/j.seares.2023.102379", { "type": "erratum" }],
+  ["10.1038/ncomms16126", { "type": "erratum" }],
+  ["10.1016/j.pocean.2007.01.014", { "type": "erratum" }],
+];
 
 export const patches = new Map([
   ...unpaywallUpdates,
@@ -81,12 +97,11 @@ export const patches = new Map([
   ...wrong,
   ...notitle,
   ...misc,
-  ...errata
+  ...errata,
   //LÃ¸kken => ø
   //JÃ¸rgensen
   //â€“ => –
   //["10.1577/1548-8659(1985)114%3C590:mpoacj%3E2.0.co;2", { published: "1985" }],
-
 ]);
 
 // Books/chapters missing printed
