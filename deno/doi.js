@@ -6,15 +6,31 @@ const config = {
   sort: "-published",
 };
 
-const validateRequest = ({ url }) => {
-  return { status: 200 };
-};
-
-export const getdoi = async ({ kv, groups: { prefix, suffix }, request }) => {
+const _delete = async ({ kv, groups: { prefix, suffix }, request }) => {
   const doi = `${prefix}/${suffix}`.toLowerCase();
   const { value } = await kv.get(["dois", doi]);
-  console.warn(value);
+  if (value) {
+    await kv.delete(["dois", doi]);
+    return jsonResponse(value);
+  }
+  return httpError({ request, status: 404 });
+};
+
+const _get = async ({ kv, groups: { prefix, suffix }, request }) => {
+  const doi = `${prefix}/${suffix}`.toLowerCase();
+  const { value } = await kv.get(["dois", doi]);
   return value ? jsonResponse(value) : httpError({ request, status: 404 });
+};
+
+export const doi = async ({ kv, groups, request }) => {
+  switch (request.method) {
+    case "GET":
+      return _get({ kv, request, groups });
+    case "DELETE":
+      return _delete({ kv, request, groups });
+    default:
+      return httpError({ request, status: 405 });
+  }
 };
 
 const stringSortFactory = ({ key, dir = 1 } = {}) => (a, b) =>

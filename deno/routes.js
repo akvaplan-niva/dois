@@ -1,4 +1,4 @@
-import { getdoi, getdois } from "./doi.js";
+import { doi, getdois } from "./doi.js";
 //import { candidate } from "./candidate.js";
 import { seed } from "./seed.js";
 import { getslim } from "./slim.js";
@@ -21,7 +21,7 @@ const _patternHandlers = [
     pattern: { pathname: "/doi" },
     handler: getdois,
   },
-  { pattern: { pathname: "/doi/:prefix/:suffix*" }, handler: getdoi },
+  { pattern: { pathname: "/doi/:prefix/:suffix*" }, handler: doi },
 
   //{ pattern: { pathname: "/candidate/:prefix/:suffix*" }, handler: candidate },
   {
