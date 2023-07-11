@@ -9,7 +9,7 @@ import {
 
 const kv = await Deno.openKv();
 
-serve(async (request) => {
+Deno.serve(async (request) => {
   const basicAuth = await scryptBasicAuth(request, { accept: acceptSafe });
   if (!basicAuth.ok) {
     return basicAuth;
