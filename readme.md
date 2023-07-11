@@ -2,29 +2,27 @@
 
 This [git repository](https://github.com/akvaplan-niva/dois) contains metadata for Akvaplan-niva publications with a DOI.
 
-The metadata is collected by an automated pipeline and stored as NDJSON in the `slim` directory.
-
+## Service
 The [Deno Deploy](https://deno.com/deploy) service https://dois.deno.dev/ is connected to `main` on this repository and is the data source of https://akvaplan.no/en/publications
 
-## Output format
+## Pipeline
+The metadata is collected by an automated [pipeline](bin/doi-pipeline) and stored as NDJSON in the `slim` directory.
 
-The [DOI pipeline](bin/doi-pipeline) yields one newline delimited JSON file per year, containing _slim_ metadata ([example](https://dois.deno.dev/doi/10.3389/fenvs.2021.662168).
+The pipeline finds Akvaplan-niva publications in Crossref, CRISTIN, and OpenAlex.
 
 ## Use
 
-### Add DOIs (to local disk)
-
-Add/edit a NDJSON file in `doi/*/*.ndjson` and run pipeline:
-
+### Run pipeline
 ```sh
 ./bin/doi-pipeline
 ```
+### Add DOIs (to local disk)
+Manually add DOIs by adding/editing a NDJSON file in `doi/*/*.ndjson` and run pipeline.
 
-
-### Update service
+### Update service data 
 Inspect and push approved changes in `slim/*.ndjson`.
 
-To update the data service, run 
+Update the KV store in the data service: 
 ```sh
 $ curl --netrc -XPOST https://dois.deno.dev/ingest
 ```
@@ -32,8 +30,6 @@ $ curl --netrc -XPOST https://dois.deno.dev/ingest
 ```json
 {"ingested":1669,"total":1669,"elapsed":198.636,"start":"2023-07-11T13:16:13.589Z","end":"2023-07-11T13:19:32.225Z","ok":true}
 ```
-
-
 
 ## Pipeline details
 
@@ -44,6 +40,7 @@ The DOI pipeline consists of the following steps:
 First, create list of unique DOIs
 
 - Extract DOIs from [`raw`](raw) text references
+- Find DOIs in Crossref, CRISTIN, and OpenAlex
 - Add these into the NDJSON-formatted DOIs in [`doi`](doi)
 - De-deplicate the DOIs
 
