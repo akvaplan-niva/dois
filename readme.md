@@ -1,43 +1,39 @@
 # Akvaplan-niva DOIs
 
-This [git repository](https://github.com/akvaplan-niva/dois) contains metadata for Akvaplan-niva publications with a DOI, and used in https://akvaplan.app/pubs.
+This [git repository](https://github.com/akvaplan-niva/dois) contains metadata for Akvaplan-niva publications with a DOI.
 
-The output data is automatically pushed to a [Deno Deploy](https://deno.com/deploy) service: https://dois.deno.dev/
-([source](deno/deploy.js))
+The metadata is collected by an automated pipeline and stored as NDJSON in the `slim` directory.
+
+The [Deno Deploy](https://deno.com/deploy) service https://dois.deno.dev/ is connected to `main` on this repository and is the data source of https://akvaplan.no/en/publications
 
 ## Output format
 
-The [DOI pipeline](bin/doi-pipeline) yields one newline delimited JSON file per year, containing _slim_ metadata, [like](https://dois.deno.dev/doi/10.3389/fenvs.2021.662168):
-
-```json
-{
-  "published": "2021-06-07",
-  "type": "journal-article",
-  "container": "Frontiers in Environmental Science",
-  "title": "Microplastic Fiber Emissions From Wastewater Effluents: Abundance, Transport Behavior and Exposure Risk for Biota in an Arctic Fjord",
-  "authors": [
-    { "family": "Herzke", "given": "Dorte", "first": true },
-    { "family": "Ghaffari", "given": "Peygham" },
-    { "family": "Sundet", "given": "Jan Henry" },
-    { "family": "Tranang", "given": "Caroline Aas" },
-    { "family": "Halsband", "given": "Claudia" }
-  ],
-  "doi": "10.3389/fenvs.2021.662168",
-  "license": "cc-by",
-  "open": true,
-  "pdf": "https://www.frontiersin.org/articles/10.3389/fenvs.2021.662168/pdf"
-}
-```
+The [DOI pipeline](bin/doi-pipeline) yields one newline delimited JSON file per year, containing _slim_ metadata ([example](https://dois.deno.dev/doi/10.3389/fenvs.2021.662168).
 
 ## Use
 
-### Add DOI(s)
+### Add DOIs (to local disk)
 
 Add/edit a NDJSON file in `doi/*/*.ndjson` and run pipeline:
 
 ```sh
 ./bin/doi-pipeline
 ```
+
+
+### Update service
+Inspect and push approved changes in `slim/*.ndjson`.
+
+To update the data service, run 
+```sh
+$ curl --netrc -XPOST https://dois.deno.dev/ingest
+```
+
+```json
+{"ingested":1669,"total":1669,"elapsed":198.636,"start":"2023-07-11T13:16:13.589Z","end":"2023-07-11T13:19:32.225Z","ok":true}
+```
+
+
 
 ## Pipeline details
 
