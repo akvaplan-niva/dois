@@ -1,6 +1,6 @@
 import { doi, getdois } from "./doi.js";
 //import { candidate } from "./candidate.js";
-import { seed } from "./seed.js";
+import { ingest } from "./ingest.js";
 import { getslim } from "./slim.js";
 import { count } from "./reduce/count.js";
 import { group } from "./reduce/group.js";
@@ -38,8 +38,8 @@ const _patternHandlers = [
   },
 
   {
-    pattern: { pathname: "/seed" },
-    handler: seed,
+    pattern: { pathname: "/ingest" },
+    handler: ingest,
   },
   {
     pattern: { pathname: "/" },
