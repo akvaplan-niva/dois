@@ -1,5 +1,24 @@
 import { httpError, jsonResponse } from "./response.js";
-import { initKVFromNDJSONFilesInDir } from "./doi-map.js";
+
+export const initKVFromNDJSONFilesInDir = async ({ kv, dir }) => {
+  let i = 0;
+  let c = 0;
+  for await (const { name, isFile } of Deno.readDir(dir)) {
+    if (isFile) {
+      const text = (await Deno.readTextFile(`${dir}/${name}`)).trim();
+      const pubs = text.split("\n").map(JSON.parse);
+      for (const slim of pubs) {
+        c++;
+        const {ok} = await kv.set(["dois", slim.doi], slim);
+        if (ok) {
+          i++;
+        }
+      }
+    }
+  }
+  await atom.commit();
+  return {ingested: i, total: c };
+};
 
 export const ingest = async ({ kv, request }) => {
   if (!/POST/i.test(request.method)) {
