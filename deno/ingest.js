@@ -16,7 +16,6 @@ export const initKVFromNDJSONFilesInDir = async ({ kv, dir }) => {
       }
     }
   }
-  await atom.commit();
   return {ingested: i, total: c };
 };
 
