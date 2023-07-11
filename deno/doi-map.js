@@ -21,7 +21,10 @@ export const initKVFromNDJSONFilesInDir = async ({ kv, doimap, dir }) => {
 };
 
 export const initDOIMapFromKV = async ({ kv, doimap }) => {
-  for await (const { value } of kv.list({ prefix: ["dois"] })) {
+  const prefix = ["dois"];
+  const consistency = "eventual";
+  const batchSize = 500;
+  for await (const { value } of kv.list({ prefix, consistency, batchSize })) {
     doimap.set(value.doi.toLowerCase(), value);
   }
 };
