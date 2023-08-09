@@ -91,6 +91,14 @@ const errata = [
   ["10.1016/j.pocean.2007.01.014", { "type": "erratum" }],
 ];
 
+const ru = [
+  ["10.21072/mbj.2022.07.2.02", {
+    title:
+      "Species composition and biogeographic structureof the polychaete fauna of the Pechora Sea during warming in the Arctic",
+    // RU: Видовой состав и биогеографическая структура фауны Polychaeta Печорского моря в период потепления Арктики
+  }],
+];
+
 export const patches = new Map([
   ...unpaywallUpdates,
   ...unicode,
@@ -98,6 +106,7 @@ export const patches = new Map([
   ...notitle,
   ...misc,
   ...errata,
+  ...ru,
   //LÃ¸kken => ø
   //JÃ¸rgensen
   //â€“ => –
