@@ -1,18 +1,19 @@
 import { routes } from "./routes.js";
 import { httpError } from "./response.js";
 
-import { serve } from "https://deno.land/std@0.193.0/http/server.ts";
 import {
-  acceptSafe,
+  safeMethods,
   scryptBasicAuth,
 } from "https://deno.land/x/scrypt_basic_auth@1.0.2/mod.ts";
 
 const kv = await Deno.openKv();
 
 Deno.serve(async (request) => {
-  const basicAuth = await scryptBasicAuth(request, { accept: acceptSafe });
-  if (!basicAuth.ok) {
-    return basicAuth;
+  if (!safeMethods.has(request.method)) {
+    const basicAuth = await scryptBasicAuth(request);
+    if (!basicAuth.ok) {
+      return basicAuth;
+    }
   }
   const url = new URL(request.url);
   const found = { route: false };

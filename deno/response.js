@@ -13,9 +13,14 @@ export const httpError = ({ request, status }) =>
     status,
   });
 
-export const jsonResponse = (o) =>
+export const jsonResponse = (
+  o,
+  { status = 200, headers = corsHeaders({ contentType: "application/json" }) } =
+    {},
+) =>
   new Response(JSON.stringify(o) + "\n", {
-    headers: corsHeaders({ contentType: "application/json" }),
+    status,
+    headers,
   });
 
 export const textResponse = (text) =>

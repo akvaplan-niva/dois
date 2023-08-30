@@ -23,10 +23,24 @@ const _get = async ({ kv, groups: { prefix, suffix }, request }) => {
   return value ? jsonResponse(value) : httpError({ request, status: 404 });
 };
 
+const _set = async ({ kv, request }) => {
+  const slim = await request.json();
+  // @todo schema validate
+  const { ok } = await kv.set(["dois", slim.doi], slim);
+  if (!ok) {
+    return httpError({ request, status: 500 });
+  }
+  const status = 201;
+  return jsonResponse(slim, { status });
+};
+
 export const doi = async ({ kv, groups, request }) => {
   switch (request.method) {
     case "GET":
       return _get({ kv, request, groups });
+    case "POST":
+    case "PUT":
+      return _set({ kv, request, groups });
     case "DELETE":
       return _delete({ kv, request, groups });
     default:
@@ -48,7 +62,6 @@ const forceDefaultParams = ({ url }) => {
 };
 
 export const getdois = async ({ kv, request, url, groups }) => {
-
   if (doimap.size === 0) {
     await initDOIMapFromKV({ kv, doimap });
   }
@@ -58,7 +71,7 @@ export const getdois = async ({ kv, request, url, groups }) => {
     ? url.searchParams.get("limit")
     : doimap.size;
   const limit = "-1" === _limit ? doimap.size : Number(_limit);
-  
+
   const format = url.searchParams.get("format");
   const sort = url.searchParams.get("sort");
   const dir = /^-/.test(sort) ? -1 : 1;
